@@ -62,6 +62,7 @@ export default function DeposantsScreen() {
 
     try {
       let updatedDeposants = [...deposants];
+      let generatedCode = '';
 
       if (editingDeposant) {
         // Modification
@@ -72,9 +73,10 @@ export default function DeposantsScreen() {
         };
       } else {
         // Nouveau déposant
+        generatedCode = generateCode(formData.prenom, formData.nom);
         const newDeposant: Deposant = {
           id: Date.now().toString(),
-          code: generateCode(formData.prenom, formData.nom),
+          code: generatedCode,
           ...formData,
           dateCreation: new Date().toLocaleDateString(),
           nbArticles: 0,
@@ -85,12 +87,12 @@ export default function DeposantsScreen() {
       await AsyncStorage.setItem('deposants', JSON.stringify(updatedDeposants));
       setDeposants(updatedDeposants);
       closeModal();
-      
+
       Alert.alert(
-        'Succès', 
-        editingDeposant 
-          ? 'Déposant modifié avec succès' 
-          : `Déposant créé avec le code: ${editingDeposant?.code || generateCode(formData.prenom, formData.nom)}`
+        'Succès',
+        editingDeposant
+          ? 'Déposant modifié avec succès'
+          : `Déposant créé avec le code: ${generatedCode}`
       );
     } catch (error) {
       Alert.alert('Erreur', 'Impossible de sauvegarder le déposant');
