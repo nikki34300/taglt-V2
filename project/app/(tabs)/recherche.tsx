@@ -83,11 +83,11 @@ export default function RechercheScreen() {
       filtered = filtered.filter(article => article.sexe === filters.sexe);
     }
 
-    if (filters.prixMin) {
+    if (filters.prixMin !== '' && !isNaN(parseFloat(filters.prixMin))) {
       filtered = filtered.filter(article => article.prix >= parseFloat(filters.prixMin));
     }
 
-    if (filters.prixMax) {
+    if (filters.prixMax !== '' && !isNaN(parseFloat(filters.prixMax))) {
       filtered = filtered.filter(article => article.prix <= parseFloat(filters.prixMax));
     }
 
