@@ -50,8 +50,14 @@ export default function DeposantsScreen() {
 
   const generateCode = (prenom: string, nom: string): string => {
     const base = (prenom.substring(0, 2) + nom.substring(0, 1)).toUpperCase();
-    const random = Math.floor(Math.random() * 10);
-    return `${base}${random}`;
+    let code = '';
+    do {
+      const random = Math.floor(Math.random() * 1000)
+        .toString()
+        .padStart(3, '0');
+      code = `${base}${random}`;
+    } while (deposants.some(d => d.code === code));
+    return code;
   };
 
   const saveDeposant = async () => {
