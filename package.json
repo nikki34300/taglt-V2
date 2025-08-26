@@ -1,7 +1,9 @@
-@@ .. @@
-   "scripts": {
-     "dev": "EXPO_NO_TELEMETRY=1 expo start",
-+    "build": "expo export --platform web",
-     "build:web": "expo export --platform web",
-     "lint": "expo lint"
-   },
+{
+  "scripts": {
+    "dev": "EXPO_NO_TELEMETRY=1 expo start",
+    "build": "expo export --platform web",
+    "build:web": "expo export --platform web",
+    "lint": "expo lint"
+  }
+}
+
